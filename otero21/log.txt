@@ -1,0 +1,321 @@
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ git init otero21
+Initialized empty Git repository in C:/Users/user/Desktop/otero21/.git/
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ git config --global usser.name Emmanuel1661
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ git config  --global user.name "Emmanuel1661"
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ git config  --global user.email "emmanuelotero82@gmail.com"
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ git checkout -b feature
+fatal: not a git repository (or any of the parent directories): .git
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ ls
+Documents/  any-data-recovery-pro-6-4-0.exe*  desktop.ini  otero21/  rcsetup154.exe*
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop
+$ cd otero21/
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git checkout -b feature
+Switched to a new branch 'feature'
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ echo "texto inicial" > archivo.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git add archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git commit -m "commit inicial"
+[feature (root-commit) 433eccc] commit inicial
+ 1 file changed, 1 insertion(+)
+ create mode 100644 archivo.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git status
+On branch feature
+nothing to commit, working tree clean
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ echo "texto agregado en feacture" >> archivo.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git commit -am "segundo commit en feacture"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[feature 95b561b] segundo commit en feacture
+ 1 file changed, 1 insertion(+)
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git checkout master
+error: pathspec 'master' did not match any file(s) known to git
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ echo "tercer cambio" >> archivo.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git commit -am "tercer commit"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[feature a904d80] tercer commit
+ 1 file changed, 1 insertion(+)
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git checkout -b master
+Switched to a new branch 'master'
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git marge feature
+ git: 'marge' is not a git command. See 'git --help'.
+
+The most similar command is
+        merge
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git merge feature
+Already up to date.
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git reset --hard HEAD~1
+HEAD is now at 95b561b segundo commit en feacture
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git rebase feature
+Successfully rebased and updated refs/heads/master.
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (hotfix)
+$ echo "correcion urgente" >> archivo.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (hotfix)
+$ git commit -am "hotfix"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[hotfix 12e7086] hotfix
+ 1 file changed, 1 insertion(+)
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (hotfix)
+$ git checkout master
+Switched to branch 'master'
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git cherry-pick hotfix
+[master 4659ab8] hotfix
+ Date: Fri Oct 4 09:19:28 2024 -0500
+ 1 file changed, 1 insertion(+)
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git reflog
+4659ab8 (HEAD -> master) HEAD@{0}: cherry-pick: hotfix
+a904d80 (feature) HEAD@{1}: checkout: moving from hotfix to master
+12e7086 (hotfix) HEAD@{2}: commit: hotfix
+a904d80 (feature) HEAD@{3}: checkout: moving from master to hotfix
+a904d80 (feature) HEAD@{4}: rebase (finish): returning to refs/heads/master
+a904d80 (feature) HEAD@{5}: rebase (start): checkout feature
+95b561b HEAD@{6}: reset: moving to HEAD~1
+a904d80 (feature) HEAD@{7}: checkout: moving from feature to master
+a904d80 (feature) HEAD@{8}: commit: tercer commit
+95b561b HEAD@{9}: commit: segundo commit en feacture
+433eccc HEAD@{10}: commit (initial): commit inicial
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git checkout HEAD@{9}
+Note: switching to 'HEAD@{9}'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 95b561b segundo commit en feacture
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 ((95b561b...))
+$ git checkout feature
+Previous HEAD position was 95b561b segundo commit en feacture
+Switched to branch 'feature'
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ echo "cambio en feacture" > conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the next time Git touches it
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git commit -am "Cambio en feature"
+[feature bc03789] Cambio en feature
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (feature)
+$ git checkout master
+Switched to branch 'master'
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ echo "Cambio en master" > conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the next time Git touches it
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git commit -am "Cambio en master"
+[master 7c84b92] Cambio en master
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git merge feature
+Auto-merging conflicto.txt
+CONFLICT (add/add): Merge conflict in conflicto.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both added:      conflicto.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ nano conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ sudo nano conflicto.txt
+bash: sudo: command not found
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ notepad conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ notepad conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ notepad conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ git add conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master|MERGING)
+$ git commit -m "resolviendo conflicto en conflicto.txt"
+[master f9bc424] resolviendo conflicto en conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ touch README.MD
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ notepad README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ notepad README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git add README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ fit commit -m "Añadir archivo README con los pasos"
+bash: fit: command not found
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git commit -m "Añadir archivo README con los pasos"
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.MD
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ ls
+README.MD  archivo.txt  conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git commit -m "Añadir archivo README con los pasos"
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.MD
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ ls
+README.MD  archivo.txt  conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ notepad README.MD
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ rm README.MD
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ ls
+archivo.txt  conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ touch README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ notepad README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ ls
+README.md  archivo.txt  conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git add README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git commit -m "Añadiendo README con pasos"
+[master f0ebd74] Añadiendo README con pasos
+ 1 file changed, 15 insertions(+)
+ create mode 100644 README.md
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ ls
+README.md  archivo.txt  conflicto.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ touch log.txt
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ note pad log.txt
+bash: note: command not found
+
+user@DESKTOP-BEH5G90 MINGW64 ~/Desktop/otero21 (master)
+$ notepad log.txt
